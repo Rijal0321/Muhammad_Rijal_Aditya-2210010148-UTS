@@ -72,6 +72,11 @@ public class ResepMakananFrame extends javax.swing.JFrame {
         });
 
         btnUbah.setText("Ubah Resep");
+        btnUbah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUbahActionPerformed(evt);
+            }
+        });
 
         btnBersihkan.setText("Bersihkan");
 
@@ -187,6 +192,21 @@ public class ResepMakananFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Pilih resep untuk dihapus.");
         }
     }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
+        String selected = listResep.getSelectedValue();
+        if (selected != null) {
+            String judulBaru = txtJudul.getText().trim();
+            if (!judulBaru.isEmpty()) {
+                listModel.set(listResep.getSelectedIndex(), judulBaru);
+                JOptionPane.showMessageDialog(this, "Resep diubah!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Judul baru tidak boleh kosong.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Pilih resep untuk diubah.");
+        }
+    }//GEN-LAST:event_btnUbahActionPerformed
 
     /**
      * @param args the command line arguments

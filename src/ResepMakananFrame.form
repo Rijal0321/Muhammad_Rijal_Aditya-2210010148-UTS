@@ -201,6 +201,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Ubah Resep"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUbahActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnBersihkan">
           <Properties>
