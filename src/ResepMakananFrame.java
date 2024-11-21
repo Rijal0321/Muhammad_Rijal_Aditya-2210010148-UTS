@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -60,6 +63,11 @@ public class ResepMakananFrame extends javax.swing.JFrame {
         jLabel3.setText("List Resep Masakan");
 
         btnTambah.setText("Tambah Resep");
+        btnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahActionPerformed(evt);
+            }
+        });
 
         btnHapus.setText("Hapus Resep");
 
@@ -159,6 +167,16 @@ public class ResepMakananFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+        String judul = txtJudul.getText().trim();
+        if (!judul.isEmpty() && !listModel.contains(judul)) {
+            listModel.addElement(judul);
+            JOptionPane.showMessageDialog(this, "Resep ditambahkan!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Judul tidak valid atau sudah ada.");
+        }
+    }//GEN-LAST:event_btnTambahActionPerformed
 
     /**
      * @param args the command line arguments
