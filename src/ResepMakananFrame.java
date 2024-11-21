@@ -202,16 +202,18 @@ public class ResepMakananFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
-        String judul = txtJudul.getText().trim();
-        String isi = listResepDetails.getText().trim();
+            String judul = txtJudul.getText().trim();
+            String isiResep = listResepDetails.getText().trim();
 
-        if (!judul.isEmpty() && !isi.isEmpty() && !resepMap.containsKey(judul)) {
-            listModel.addElement(judul); 
-            resepMap.put(judul, isi); 
-            JOptionPane.showMessageDialog(this, "Resep berhasil ditambahkan!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Judul/Isi resep tidak valid atau judul sudah ada.");
-        }
+            if (!judul.isEmpty() && !resepMap.containsKey(judul)) {
+                listModel.addElement(judul);
+                resepMap.put(judul, isiResep);
+                JOptionPane.showMessageDialog(this, "Resep berhasil ditambahkan!");
+            } else if (resepMap.containsKey(judul)) {
+                JOptionPane.showMessageDialog(this, "Judul resep sudah ada.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Judul resep tidak boleh kosong.");
+            }
     }//GEN-LAST:event_btnTambahActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
