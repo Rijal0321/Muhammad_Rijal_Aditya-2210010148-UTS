@@ -79,6 +79,11 @@ public class ResepMakananFrame extends javax.swing.JFrame {
         });
 
         btnBersihkan.setText("Bersihkan");
+        btnBersihkan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBersihkanActionPerformed(evt);
+            }
+        });
 
         btnSimpan.setText("Simpan ke txt");
 
@@ -207,6 +212,11 @@ public class ResepMakananFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Pilih resep untuk diubah.");
         }
     }//GEN-LAST:event_btnUbahActionPerformed
+
+    private void btnBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBersihkanActionPerformed
+        txtJudul.setText("");
+        jTextArea1.setText("");
+    }//GEN-LAST:event_btnBersihkanActionPerformed
 
     /**
      * @param args the command line arguments
