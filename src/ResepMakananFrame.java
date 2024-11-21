@@ -217,13 +217,15 @@ public class ResepMakananFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTambahActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        String selected = listResep.getSelectedValue();
-        if (selected != null) {
-            listModel.removeElement(selected);
-            JOptionPane.showMessageDialog(this, "Resep dihapus!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Pilih resep untuk dihapus.");
-        }
+            String selected = listResep.getSelectedValue();
+            if (selected != null) {
+                listModel.removeElement(selected);
+                resepMap.remove(selected);
+                listResepDetails.setText("");
+                JOptionPane.showMessageDialog(this, "Resep berhasil dihapus!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Pilih resep untuk dihapus.");
+            }
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
