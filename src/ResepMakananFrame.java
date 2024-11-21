@@ -42,6 +42,7 @@ public class ResepMakananFrame extends javax.swing.JFrame {
         btnSimpan = new javax.swing.JButton();
         btnHapusList = new javax.swing.JButton();
         btnKeluar = new javax.swing.JButton();
+        btnMuat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,6 +118,13 @@ public class ResepMakananFrame extends javax.swing.JFrame {
             }
         });
 
+        btnMuat.setText("Muat Resep txt");
+        btnMuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMuatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -135,13 +143,16 @@ public class ResepMakananFrame extends javax.swing.JFrame {
                             .addComponent(btnBersihkan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnTambah, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnSimpan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnHapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnHapusList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnUbah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnSimpan, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                                    .addComponent(btnHapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(20, 20, 20)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnHapusList)
+                                    .addComponent(btnUbah, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnMuat))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
@@ -176,7 +187,9 @@ public class ResepMakananFrame extends javax.swing.JFrame {
                             .addComponent(btnBersihkan)
                             .addComponent(btnSimpan)
                             .addComponent(btnHapusList))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnMuat)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
                         .addComponent(btnKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
@@ -322,6 +335,48 @@ public class ResepMakananFrame extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_listResepValueChanged
 
+    private void btnMuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMuatActionPerformed
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Pilih File Resep TXT");
+    fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+    int userSelection = fileChooser.showOpenDialog(this);
+    if (userSelection == JFileChooser.APPROVE_OPTION) {
+        File file = fileChooser.getSelectedFile();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            StringBuilder isiResep = new StringBuilder();
+            String judul = reader.readLine(); // Baris pertama sebagai judul
+            
+            // Validasi jika file kosong atau judul kosong
+            if (judul == null || judul.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "File tidak valid atau judul kosong.");
+                return;
+            }
+
+            // Membaca isi resep
+            String line;
+            while ((line = reader.readLine()) != null) {
+                isiResep.append(line).append("\n");
+            }
+
+            // Tambahkan ke JList dan JTextArea
+            if (!resepMap.containsKey(judul)) {
+                listModel.addElement(judul);
+                resepMap.put(judul, isiResep.toString().trim());
+                txtJudul.setText(judul);
+                listResepDetails.setText(isiResep.toString().trim());
+                JOptionPane.showMessageDialog(this, "Resep berhasil diimpor!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Judul resep sudah ada dalam daftar.");
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat membaca file.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Import file dibatalkan.");
+    }
+    }//GEN-LAST:event_btnMuatActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -362,6 +417,7 @@ public class ResepMakananFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnHapusList;
     private javax.swing.JButton btnKeluar;
+    private javax.swing.JButton btnMuat;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnTambah;
     private javax.swing.JButton btnUbah;
