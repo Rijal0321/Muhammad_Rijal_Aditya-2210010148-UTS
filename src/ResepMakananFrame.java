@@ -254,27 +254,45 @@ public class ResepMakananFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBersihkanActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Pilih lokasi untuk menyimpan file");
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int userSelection = fileChooser.showSaveDialog(this);
+    String selectedJudul = listResep.getSelectedValue(); // Ambil judul yang dipilih
+    String isiResep = listResepDetails.getText().trim(); // Ambil isi resep dari TextArea
+    
+    if (selectedJudul == null || isiResep.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Pilih judul resep dan pastikan isi resep tidak kosong.");
+        return;
+    }
 
-        if (userSelection == JFileChooser.APPROVE_OPTION) {
-            File folder = fileChooser.getSelectedFile();
-            File file = new File(folder, "resep.txt");
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Pilih lokasi untuk menyimpan file");
+    fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                for (int i = 0; i < listModel.getSize(); i++) {
-                    writer.write(listModel.get(i));
-                    writer.newLine();
-                }
-                JOptionPane.showMessageDialog(this, "Resep berhasil disimpan di folder: " + folder.getAbsolutePath());
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat menyimpan file.");
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Penyimpanan dibatalkan.");
+    // Set nama default sesuai judul
+    fileChooser.setSelectedFile(new File(selectedJudul + ".txt"));
+
+    int userSelection = fileChooser.showSaveDialog(this);
+
+    if (userSelection == JFileChooser.APPROVE_OPTION) {
+        File file = fileChooser.getSelectedFile();
+
+        // Pastikan file memiliki ekstensi .txt
+        if (!file.getName().endsWith(".txt")) {
+            file = new File(file.getAbsolutePath() + ".txt");
         }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            writer.write("Judul Resep: " + selectedJudul);
+            writer.newLine();
+            writer.newLine();
+            writer.write("Isi Resep:");
+            writer.newLine();
+            writer.write(isiResep);
+            JOptionPane.showMessageDialog(this, "Resep berhasil disimpan di file: " + file.getAbsolutePath());
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat menyimpan file.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Penyimpanan dibatalkan.");
+    }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnHapusListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusListActionPerformed
