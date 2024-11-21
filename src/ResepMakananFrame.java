@@ -1,19 +1,19 @@
 import javax.swing.JOptionPane;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
 import java.io.*;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ResepMakananFrame extends javax.swing.JFrame {
     
     private DefaultListModel<String> listModel;
+    private HashMap<String, String> resepMap; 
 
     
     public ResepMakananFrame() {
         initComponents();
         listModel = new DefaultListModel<>();
         listResep.setModel(listModel);
+        resepMap = new HashMap<>();
 
     }
 
@@ -198,11 +198,14 @@ public class ResepMakananFrame extends javax.swing.JFrame {
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
         String judul = txtJudul.getText().trim();
-        if (!judul.isEmpty() && !listModel.contains(judul)) {
-            listModel.addElement(judul);
-            JOptionPane.showMessageDialog(this, "Resep ditambahkan!");
+        String isi = listResepDetails.getText().trim();
+
+        if (!judul.isEmpty() && !isi.isEmpty() && !resepMap.containsKey(judul)) {
+            listModel.addElement(judul); 
+            resepMap.put(judul, isi); 
+            JOptionPane.showMessageDialog(this, "Resep berhasil ditambahkan!");
         } else {
-            JOptionPane.showMessageDialog(this, "Judul tidak valid atau sudah ada.");
+            JOptionPane.showMessageDialog(this, "Judul/Isi resep tidak valid atau judul sudah ada.");
         }
     }//GEN-LAST:event_btnTambahActionPerformed
 
