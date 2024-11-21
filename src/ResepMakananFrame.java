@@ -1,20 +1,15 @@
-
 import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.ArrayList;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-/**
- *
- * @author User
- */
 public class ResepMakananFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ResepMakananFrame
-     */
+    private DefaultListModel<String> listModel;
+    private JList<String> listResep;
+    
     public ResepMakananFrame() {
         initComponents();
     }
@@ -70,6 +65,11 @@ public class ResepMakananFrame extends javax.swing.JFrame {
         });
 
         btnHapus.setText("Hapus Resep");
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
 
         btnUbah.setText("Ubah Resep");
 
@@ -177,6 +177,16 @@ public class ResepMakananFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Judul tidak valid atau sudah ada.");
         }
     }//GEN-LAST:event_btnTambahActionPerformed
+
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        String selected = listResep.getSelectedValue();
+        if (selected != null) {
+            listModel.removeElement(selected);
+            JOptionPane.showMessageDialog(this, "Resep dihapus!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Pilih resep untuk dihapus.");
+        }
+    }//GEN-LAST:event_btnHapusActionPerformed
 
     /**
      * @param args the command line arguments
