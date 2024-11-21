@@ -292,10 +292,16 @@ public class ResepMakananFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKeluarActionPerformed
 
     private void listResepValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listResepValueChanged
-        String selectedJudul = listResep.getSelectedValue();
-        if (selectedJudul != null && resepMap.containsKey(selectedJudul)) {
-            listResepDetails.setText(resepMap.get(selectedJudul)); // Tampilkan isi resep
-        }
+            if (!evt.getValueIsAdjusting()) {
+                String selected = listResep.getSelectedValue();
+                if (selected != null) {
+                    txtJudul.setText(selected); 
+                    listResepDetails.setText(resepMap.get(selected)); 
+                } else {
+                    txtJudul.setText(""); 
+                    listResepDetails.setText(""); 
+                }
+            }
     }//GEN-LAST:event_listResepValueChanged
 
     /**
