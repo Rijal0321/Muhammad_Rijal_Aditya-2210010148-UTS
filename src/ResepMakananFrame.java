@@ -278,8 +278,10 @@ public class ResepMakananFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnHapusListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusListActionPerformed
-        listModel.clear();
-        JOptionPane.showMessageDialog(this, "Semua resep telah dihapus.");
+            listModel.clear();
+            resepMap.clear();
+            listResepDetails.setText("");
+            JOptionPane.showMessageDialog(this, "Semua resep telah dihapus.");
     }//GEN-LAST:event_btnHapusListActionPerformed
 
     private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
