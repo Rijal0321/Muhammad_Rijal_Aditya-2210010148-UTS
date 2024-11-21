@@ -93,6 +93,11 @@ public class ResepMakananFrame extends javax.swing.JFrame {
         });
 
         btnHapusList.setText("Hapus Semua List");
+        btnHapusList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusListActionPerformed(evt);
+            }
+        });
 
         btnKeluar.setBackground(new java.awt.Color(255, 51, 51));
         btnKeluar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -246,6 +251,11 @@ public class ResepMakananFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Penyimpanan dibatalkan.");
         }
     }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void btnHapusListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusListActionPerformed
+        listModel.clear();
+        JOptionPane.showMessageDialog(this, "Semua resep telah dihapus.");
+    }//GEN-LAST:event_btnHapusListActionPerformed
 
     /**
      * @param args the command line arguments
