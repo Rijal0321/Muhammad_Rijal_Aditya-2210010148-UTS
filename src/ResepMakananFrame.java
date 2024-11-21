@@ -8,11 +8,13 @@ import java.util.ArrayList;
 public class ResepMakananFrame extends javax.swing.JFrame {
     
     private DefaultListModel<String> listModel;
+
     
     public ResepMakananFrame() {
         initComponents();
         listModel = new DefaultListModel<>();
         listResep.setModel(listModel);
+
     }
 
     /**
@@ -54,11 +56,6 @@ public class ResepMakananFrame extends javax.swing.JFrame {
         listResepDetails.setRows(5);
         jScrollPane1.setViewportView(listResepDetails);
 
-        listResep.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listResepValueChanged(evt);
-            }
-        });
         jScrollPane2.setViewportView(listResep);
 
         jLabel3.setText("List Resep Masakan");
@@ -274,13 +271,6 @@ public class ResepMakananFrame extends javax.swing.JFrame {
             System.exit(0);
         }
     }//GEN-LAST:event_btnKeluarActionPerformed
-
-    private void listResepValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listResepValueChanged
-        int selectedIndex = listResep.getSelectedIndex();
-        if (selectedIndex != -1) {
-         listResepDetails.setText(listResepDetails.get(selectedIndex)); // Menampilkan resep yang sesuai
-        }
-    }//GEN-LAST:event_listResepValueChanged
 
     /**
      * @param args the command line arguments
