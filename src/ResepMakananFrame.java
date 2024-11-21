@@ -103,6 +103,11 @@ public class ResepMakananFrame extends javax.swing.JFrame {
         btnKeluar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnKeluar.setForeground(new java.awt.Color(255, 255, 255));
         btnKeluar.setText("Keluar Aplikasi");
+        btnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKeluarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -256,6 +261,13 @@ public class ResepMakananFrame extends javax.swing.JFrame {
         listModel.clear();
         JOptionPane.showMessageDialog(this, "Semua resep telah dihapus.");
     }//GEN-LAST:event_btnHapusListActionPerformed
+
+    private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
+        int confirm = JOptionPane.showConfirmDialog(this, "Anda yakin ingin keluar?", "Konfirmasi Keluar", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnKeluarActionPerformed
 
     /**
      * @param args the command line arguments
