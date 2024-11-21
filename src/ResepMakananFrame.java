@@ -227,18 +227,23 @@ public class ResepMakananFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
-        String selected = listResep.getSelectedValue();
-        if (selected != null) {
+            String selected = listResep.getSelectedValue();
             String judulBaru = txtJudul.getText().trim();
-            if (!judulBaru.isEmpty()) {
-                listModel.set(listResep.getSelectedIndex(), judulBaru);
-                JOptionPane.showMessageDialog(this, "Resep diubah!");
+            String isiBaru = listResepDetails.getText().trim();
+
+            if (selected != null && !judulBaru.isEmpty()) {
+                if (!resepMap.containsKey(judulBaru) || selected.equals(judulBaru)) {
+                    // Update judul dan isi
+                    resepMap.remove(selected);
+                    listModel.set(listResep.getSelectedIndex(), judulBaru);
+                    resepMap.put(judulBaru, isiBaru);
+                    JOptionPane.showMessageDialog(this, "Resep berhasil diubah!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Judul baru sudah ada di daftar.");
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Judul baru tidak boleh kosong.");
+                JOptionPane.showMessageDialog(this, "Pilih resep dan pastikan judul baru tidak kosong.");
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Pilih resep untuk diubah.");
-        }
     }//GEN-LAST:event_btnUbahActionPerformed
 
     private void btnBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBersihkanActionPerformed
